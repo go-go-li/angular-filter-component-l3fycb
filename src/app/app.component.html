@@ -1,0 +1,32 @@
+<!-- quick-filter.component.html -->
+<div>
+  <input type="text" [(ngModel)]="searchValue" placeholder="Search..." />
+</div>
+
+<div *ngFor="let value of availableValues">
+  <label *ngIf="value.toLowerCase().includes(searchValue.toLowerCase())">
+    <input
+      type="checkbox"
+      [value]="value"
+      (change)="onCheckboxChange(value)"
+      [checked]="selectedValues.includes(value)"
+    />
+    {{ value }}
+  </label>
+</div>
+
+<div *ngIf="selectedValues.length > 0">
+  <p>Selected Values:</p>
+  <div *ngFor="let value of selectedValues">
+    <label>
+      <input
+        type="checkbox"
+        [value]="value"
+        (change)="onCheckboxChange(value)"
+        checked
+      />
+      {{ value }}
+    </label>
+  </div>
+  <button (click)="saveSelectedValues()">Save</button>
+</div>
